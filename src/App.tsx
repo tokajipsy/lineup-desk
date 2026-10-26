@@ -70,10 +70,8 @@ function TacticalMap({ lineup, compact = false }: { lineup: Lineup; compact?: bo
       style={style}
       aria-label={`${map.name} tactical diagram. Start at ${lineup.start.x}, ${lineup.start.y}; target at ${lineup.target.x}, ${lineup.target.y}.`}
     >
+      <img className="map-art" src={map.minimapUrl} alt="" loading="lazy" />
       <div className="map-grid" />
-      <div className="map-zone map-zone--a">A</div>
-      <div className="map-zone map-zone--b">{map.secondarySite}</div>
-      <div className="map-spine" />
       <div
         className="marker marker--start"
         style={{ left: `${lineup.start.x}%`, top: `${lineup.start.y}%` }}
@@ -101,9 +99,68 @@ function AgentBadge({ id, small = false }: { id: AgentId; small?: boolean }) {
       className={`agent-badge ${small ? "agent-badge--small" : ""}`}
       style={{ "--agent-color": agent.color } as CSSProperties}
     >
-      <span>{agent.mark}</span>
+      <span><img src={agent.iconUrl} alt={small ? agent.name : ""} loading="lazy" /></span>
       {!small && <b>{agent.name}</b>}
     </span>
+  );
+}
+
+function youtubeEmbedUrl(value?: string) {
+  if (!value) return undefined;
+  try {
+    const url = new URL(value);
+    if (url.hostname === "youtu.be") return `https://www.youtube-nocookie.com/embed/${url.pathname.slice(1)}`;
+    if (url.hostname.endsWith("youtube.com")) {
+      const id = url.searchParams.get("v") || url.pathname.split("/embed/")[1] || url.pathname.split("/shorts/")[1];
+      if (id) return `https://www.youtube-nocookie.com/embed/${id.split("/")[0]}`;
+    }
+  } catch {
+    return undefined;
+  }
+  return undefined;
+}
+
+function LineupMedia({ lineup, compact = false }: { lineup: Lineup; compact?: boolean }) {
+  const [mediaFailed, setMediaFailed] = useState(false);
+  const map = getMap(lineup.mapId);
+  const agent = getAgent(lineup.agentId);
+  const suppliedMedia = lineup.mediaUrl?.trim();
+  const youtubeUrl = youtubeEmbedUrl(suppliedMedia);
+  const isVideo = Boolean(suppliedMedia && /\.(mp4|webm)(?:[?#].*)?$/i.test(suppliedMedia));
+  const showContextArt = !suppliedMedia || mediaFailed;
+
+  return (
+    <figure className={`media-reference ${compact ? "media-reference--compact" : ""}`}>
+      {youtubeUrl && !mediaFailed ? (
+        <iframe
+          src={youtubeUrl}
+          title={`${lineup.title} video reference`}
+          loading="lazy"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+        />
+      ) : isVideo && !mediaFailed ? (
+        <video controls preload="metadata" poster={map.splashUrl} onError={() => setMediaFailed(true)}>
+          <source src={suppliedMedia} />
+        </video>
+      ) : (
+        <div className="media-reference__art">
+          <img
+            className="media-reference__map"
+            src={showContextArt ? map.splashUrl : suppliedMedia}
+            alt={showContextArt ? `${map.name} environment` : `${lineup.title} visual reference`}
+            loading="lazy"
+            onError={() => setMediaFailed(true)}
+          />
+          {showContextArt && <img className="media-reference__agent" src={agent.portraitUrl} alt="" loading="lazy" />}
+          <span>{showContextArt ? `${map.name} · ${agent.name}` : "Lineup reference"}</span>
+        </div>
+      )}
+      <figcaption>
+        <b>{showContextArt ? "Map context" : "Visual reference"}</b>
+        <span>{showContextArt ? "Use the marked minimap for the practice start and target." : `Media supplied by ${lineup.creator}.`}</span>
+      </figcaption>
+    </figure>
   );
 }
 
@@ -286,6 +343,7 @@ function DetailPanel({
           <button className="icon-button" onClick={onClose} aria-label="Close details">×</button>
         </div>
         <TacticalMap lineup={lineup} />
+        <LineupMedia lineup={lineup} compact />
         <div className="detail-meta">
           <AgentBadge id={lineup.agentId} />
           <div><b>{lineup.ability}</b><span>{lineup.category}</span></div>
@@ -457,6 +515,7 @@ function PracticeView({
             </div>
           ) : (
             <div className="reveal-content">
+              <LineupMedia lineup={current} compact />
               <ol className="steps-list compact">
                 {current.steps.map((step, stepIndex) => (
                   <li key={step}><span>{String(stepIndex + 1).padStart(2, "0")}</span><p>{step}</p></li>

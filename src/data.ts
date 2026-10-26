@@ -13,18 +13,20 @@ export interface MapDefinition {
   secondarySite: string;
   locale: string;
   accent: string;
+  minimapUrl: string;
+  splashUrl: string;
   starts: [Point, Point];
   targets: [Point, Point];
 }
 
 export const maps: MapDefinition[] = [
-  { id: "abyss", name: "Abyss", code: "ABS", secondarySite: "B", locale: "Edge Complex", accent: "#8f8cff", starts: [{ x: 18, y: 70 }, { x: 76, y: 72 }], targets: [{ x: 28, y: 28 }, { x: 73, y: 29 }] },
-  { id: "bind", name: "Bind", code: "BND", secondarySite: "B", locale: "Desert Lab", accent: "#f2a66d", starts: [{ x: 20, y: 76 }, { x: 79, y: 68 }], targets: [{ x: 27, y: 24 }, { x: 70, y: 30 }] },
-  { id: "corrode", name: "Corrode", code: "CRD", secondarySite: "B", locale: "Flooded Bastion", accent: "#7dc0ad", starts: [{ x: 22, y: 72 }, { x: 74, y: 76 }], targets: [{ x: 31, y: 27 }, { x: 73, y: 25 }] },
-  { id: "haven", name: "Haven", code: "HVN", secondarySite: "C", locale: "Mountain Monastery", accent: "#efca79", starts: [{ x: 18, y: 72 }, { x: 82, y: 66 }], targets: [{ x: 24, y: 24 }, { x: 78, y: 24 }] },
-  { id: "lotus", name: "Lotus", code: "LTS", secondarySite: "C", locale: "Ancient Stepwell", accent: "#dc8fca", starts: [{ x: 22, y: 78 }, { x: 76, y: 73 }], targets: [{ x: 30, y: 25 }, { x: 75, y: 29 }] },
-  { id: "sunset", name: "Sunset", code: "SUN", secondarySite: "B", locale: "City Block", accent: "#ff8c74", starts: [{ x: 20, y: 73 }, { x: 78, y: 76 }], targets: [{ x: 28, y: 26 }, { x: 69, y: 27 }] },
-  { id: "summit", name: "Summit", code: "SMT", secondarySite: "B", locale: "Radiant Academy", accent: "#84b7e8", starts: [{ x: 24, y: 76 }, { x: 77, y: 72 }], targets: [{ x: 32, y: 24 }, { x: 70, y: 28 }] },
+  { id: "abyss", name: "Abyss", code: "ABS", secondarySite: "B", locale: "Edge Complex", accent: "#8f8cff", minimapUrl: "https://media.valorant-api.com/maps/224b0a95-48b9-f703-1bd8-67aca101a61f/displayicon.png", splashUrl: "https://media.valorant-api.com/maps/224b0a95-48b9-f703-1bd8-67aca101a61f/splash.png", starts: [{ x: 18, y: 70 }, { x: 76, y: 72 }], targets: [{ x: 28, y: 28 }, { x: 73, y: 29 }] },
+  { id: "bind", name: "Bind", code: "BND", secondarySite: "B", locale: "Desert Lab", accent: "#f2a66d", minimapUrl: "https://media.valorant-api.com/maps/2c9d57ec-4431-9c5e-2939-8f9ef6dd5cba/displayicon.png", splashUrl: "https://media.valorant-api.com/maps/2c9d57ec-4431-9c5e-2939-8f9ef6dd5cba/splash.png", starts: [{ x: 20, y: 76 }, { x: 79, y: 68 }], targets: [{ x: 27, y: 24 }, { x: 70, y: 30 }] },
+  { id: "corrode", name: "Corrode", code: "CRD", secondarySite: "B", locale: "Flooded Bastion", accent: "#7dc0ad", minimapUrl: "https://media.valorant-api.com/maps/1c18ab1f-420d-0d8b-71d0-77ad3c439115/displayicon.png", splashUrl: "https://media.valorant-api.com/maps/1c18ab1f-420d-0d8b-71d0-77ad3c439115/splash.png", starts: [{ x: 22, y: 72 }, { x: 74, y: 76 }], targets: [{ x: 31, y: 27 }, { x: 73, y: 25 }] },
+  { id: "haven", name: "Haven", code: "HVN", secondarySite: "C", locale: "Mountain Monastery", accent: "#efca79", minimapUrl: "https://media.valorant-api.com/maps/2bee0dc9-4ffe-519b-1cbd-7fbe763a6047/displayicon.png", splashUrl: "https://media.valorant-api.com/maps/2bee0dc9-4ffe-519b-1cbd-7fbe763a6047/splash.png", starts: [{ x: 18, y: 72 }, { x: 82, y: 66 }], targets: [{ x: 24, y: 24 }, { x: 78, y: 24 }] },
+  { id: "lotus", name: "Lotus", code: "LTS", secondarySite: "C", locale: "Ancient Stepwell", accent: "#dc8fca", minimapUrl: "https://media.valorant-api.com/maps/2fe4ed3a-450a-948b-6d6b-e89a78e680a9/displayicon.png", splashUrl: "https://media.valorant-api.com/maps/2fe4ed3a-450a-948b-6d6b-e89a78e680a9/splash.png", starts: [{ x: 22, y: 78 }, { x: 76, y: 73 }], targets: [{ x: 30, y: 25 }, { x: 75, y: 29 }] },
+  { id: "sunset", name: "Sunset", code: "SUN", secondarySite: "B", locale: "City Block", accent: "#ff8c74", minimapUrl: "https://media.valorant-api.com/maps/92584fbe-486a-b1b2-9faa-39b0f486b498/displayicon.png", splashUrl: "https://media.valorant-api.com/maps/92584fbe-486a-b1b2-9faa-39b0f486b498/splash.png", starts: [{ x: 20, y: 73 }, { x: 78, y: 76 }], targets: [{ x: 28, y: 26 }, { x: 69, y: 27 }] },
+  { id: "summit", name: "Summit", code: "SMT", secondarySite: "B", locale: "Radiant Academy", accent: "#84b7e8", minimapUrl: "https://media.valorant-api.com/maps/756da597-416b-c0f2-f47b-afbdf28670bc/displayicon.png", splashUrl: "https://media.valorant-api.com/maps/756da597-416b-c0f2-f47b-afbdf28670bc/splash.png", starts: [{ x: 24, y: 76 }, { x: 77, y: 72 }], targets: [{ x: 32, y: 24 }, { x: 70, y: 28 }] },
 ];
 
 export const agents: Array<{
@@ -33,11 +35,13 @@ export const agents: Array<{
   role: string;
   mark: string;
   color: string;
+  iconUrl: string;
+  portraitUrl: string;
 }> = [
-  { id: "sage", name: "Sage", role: "Sentinel", mark: "SG", color: "#82e2ce" },
-  { id: "clove", name: "Clove", role: "Controller", mark: "CL", color: "#d998ff" },
-  { id: "fade", name: "Fade", role: "Initiator", mark: "FD", color: "#8aa0be" },
-  { id: "neon", name: "Neon", role: "Duelist", mark: "NN", color: "#6fbfff" },
+  { id: "sage", name: "Sage", role: "Sentinel", mark: "SG", color: "#82e2ce", iconUrl: "https://media.valorant-api.com/agents/569fdd95-4d10-43ab-ca70-79becc718b46/displayicon.png", portraitUrl: "https://media.valorant-api.com/agents/569fdd95-4d10-43ab-ca70-79becc718b46/fullportrait.png" },
+  { id: "clove", name: "Clove", role: "Controller", mark: "CL", color: "#d998ff", iconUrl: "https://media.valorant-api.com/agents/1dbf2edd-4729-0984-3115-daa5eed44993/displayicon.png", portraitUrl: "https://media.valorant-api.com/agents/1dbf2edd-4729-0984-3115-daa5eed44993/fullportrait.png" },
+  { id: "fade", name: "Fade", role: "Initiator", mark: "FD", color: "#8aa0be", iconUrl: "https://media.valorant-api.com/agents/dade69b4-4f5a-8528-247b-219e5a1facd6/displayicon.png", portraitUrl: "https://media.valorant-api.com/agents/dade69b4-4f5a-8528-247b-219e5a1facd6/fullportrait.png" },
+  { id: "neon", name: "Neon", role: "Duelist", mark: "NN", color: "#6fbfff", iconUrl: "https://media.valorant-api.com/agents/bb2a4828-46eb-8cd1-e765-15848195d751/displayicon.png", portraitUrl: "https://media.valorant-api.com/agents/bb2a4828-46eb-8cd1-e765-15848195d751/fullportrait.png" },
 ];
 
 type DrillTemplate = {
